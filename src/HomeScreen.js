@@ -1,9 +1,12 @@
 import React from 'react'
 import './HomeScreen.css'
+import Nav from './Nav'
 
 function HomeScreen() {
   return (
-    <div className='homeScreen'>HomeScreen</div>
+    <div className='homeScreen'>
+      <Nav/>
+    </div>
   )
 }
 
