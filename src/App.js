@@ -1,14 +1,17 @@
 import React from "react";
 import "./App.css";
-import HomeScreen from "./HomeScreen";
+import Navbar from "./Components/Navbar";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Components/Pages/Home";
 
 function App() {
   return (
-    <div className="App">
-      <h2>
-        <HomeScreen />
-      </h2>
-    </div>
+    <>
+        <Navbar />
+        <Routes>
+      <Route path="/" element={<Home/>}/>
+        </Routes>
+    </>
   );
 }
 
