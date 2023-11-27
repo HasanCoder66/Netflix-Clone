@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import requests from './Request';
+import axios from 'axios';
 
 function Main() {
     const [movies, setMovies] = useState([]);
@@ -8,8 +10,9 @@ function Main() {
           setMovies(response.data.results);
         });
       }, []);
+      console.log(movies)
   return (
-    <div>Main</div>
+    <div className='text-white'>Main</div>
   )
 }
 
