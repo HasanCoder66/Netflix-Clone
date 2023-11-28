@@ -10,17 +10,17 @@ function Navbar() {
         </h1>
       {/* </Link> */}
       {/* {user?.email ? ( */}
-        <div>
+        {/* <div> */}
           {/* <Link to='/account'> */}
-            <button className='text-white pr-4'>Account</button>
+            {/* <button className='text-white pr-4'>Account</button> */}
           {/* </Link> */}
-          <button
-            // onClick={handleLogout}
-            className='bg-red-600 px-6 py-2 rounded cursor-pointer text-white'
-          >
-            Logout
-          </button>
-        </div>
+          {/* <button */}
+            {/* // onClick={handleLogout} */}
+            {/* className='bg-red-600 px-6 py-2 rounded cursor-pointer text-white' */}
+          {/* > */}
+            {/* Logout */}
+          {/* </button> */}
+        {/* </div> */}
       {/* ) : ( */}
         <div>
           {/* <Link to='/login'> */}
