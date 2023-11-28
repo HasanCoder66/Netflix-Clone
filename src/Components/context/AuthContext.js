@@ -30,11 +30,12 @@ export const AuthContextProvider = ({ children }) => {
         })) ;
         return () => {
             unSubscribe()
-        }
-    },[])
+        };
+    });
 
   return <AuthContext.Provider value={{signup , login , logout , user}}>
-    {children}</AuthContext.Provider>;
+    {children}
+    </AuthContext.Provider>;
 };
 
 export const UserAuth = () => {
