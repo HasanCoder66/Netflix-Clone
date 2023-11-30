@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserAuth , AuthContextProvider} from '../context/AuthContext';
 
 function Signup() {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const {user , signup } = UserAuth()
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
+e.preventDefault()
+try {
+  await signup(email, password)
+  navigate('/')
+} catch (error) {
+  console.log(error)
+}
+  }
   return (
     <div className='w-full h-screen'>
     <img
@@ -14,18 +31,18 @@ function Signup() {
         <div className='max-w-[320px] mx-auto py-16'>
           <h1 className='text-3xl font-bold'>Sign Up</h1>
           <form
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             className='w-full flex flex-col py-4'
           >
             <input
-            //   onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               className='p-3 my-2 bg-gray-700 rouded'
               type='email'
               placeholder='Email'
               autoComplete='email'
             />
             <input
-            //   onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               className='p-3 my-2 bg-gray-700 rouded'
               type='password'
               placeholder='Password'
@@ -45,9 +62,9 @@ function Signup() {
               <span className='text-gray-600'>
                 Already subscribed to Netflix?
               </span>{' '}
-              {/* <Link to='/login'> */}
+              <Link to='/login'>
                 Sign In
-                {/* </Link> */}
+                </Link>
             </p>
           </form>
         </div>
