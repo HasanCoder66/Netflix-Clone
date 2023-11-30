@@ -7,8 +7,8 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth , db } from "../../firebase";
-
 import { setDoc ,doc } from "firebase/firestore";
+
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
@@ -16,9 +16,9 @@ export const AuthContextProvider = ({ children }) => {
 
     const signup = (email , password) => {
          createUserWithEmailAndPassword(auth, email , password)
-         setDoc(doc(db, 'users' , email),{
-            savedShows : []
-         })
+         setDoc(doc(db, 'users', email), {
+            savedShows: []
+        })
     }
 
     const login = (email , password) => {

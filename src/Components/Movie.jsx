@@ -39,7 +39,7 @@ function Movie({item}) {
         {item?.title}
       </p>
       <p 
-      // onClick={saveShow}
+      onClick={saveShow}
       >
         {like ? (
           <FaHeart className='absolute top-4 left-4 text-gray-300' />
