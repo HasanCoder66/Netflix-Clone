@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'
+import { AiOutlineClose } from 'react-icons/ai';
 import { UserAuth } from './context/AuthContext'
 import { db } from '../firebase';
 import { updateDoc, doc, onSnapshot } from 'firebase/firestore';
 // import  
 
 function SavedShow() {
-
+    const [movies, setMovies] = useState([]);
     const {user } = UserAuth()
 
     const slideLeft = () => {
@@ -19,9 +20,29 @@ function SavedShow() {
         slider.scrollLeft = slider.scrollLeft + 500
     }
 
+    const movieRef = doc(db, 'users', `${user?.email}`)
+    const deleteShow = async (passedId) => {
+        try {
+            const result = movies.filter((item) => item.id !== passedId)
+            await updateDoc(movieRef , {
+                saveShow : result
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    useEffect(()=> {
+        onSnapshot(
+            doc(db , 'users' , `${user?.email}`), (doc) => {
+                setMovies(doc.data()?.saveShow);
+            } );
+        
+    },[user?.email])
+
+
   return (
     <>
-    <h2 className='text-white font-bold md:text-xl p-4'>{title}</h2>
+    <h2 className='text-white font-bold md:text-xl p-4'>My Shows</h2>
       <div className='relative flex items-center group'>
         <MdChevronLeft
           onClick={slideLeft}
@@ -33,7 +54,7 @@ function SavedShow() {
           className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative'
         >
           {movies.map((item, id) => (
-            <div className='w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2'>
+            <div key={item.id} className='w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2'>
             <img
               className='w-full h-auto block'
               src={`https://image.tmdb.org/t/p/w500/${item?.img}`}
@@ -43,6 +64,7 @@ function SavedShow() {
               <p className='white-space-normal text-xs md:text-sm font-bold flex justify-center items-center h-full text-center'>
                 {item?.title}
               </p>
+              <p onClick={()=> deleteShow(item.id)} className='absolute text-gray-300 top-4 right-4' ><AiOutlineClose /></p>
             </div>
           </div>
           ))}
